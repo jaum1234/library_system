@@ -1,0 +1,19 @@
+{
+    "name": "vitin/library_system",
+    "authors": [
+        {
+            "name": "jaum1234",
+            "email": "joaovitorsouzacoura@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.13",
+        "doctrine/dbal": "^3.5",
+        "symfony/yaml": "^5.4",
+        "symfony/cache": "^5.4",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {"Library\\": "src/"}
+    }
+}
