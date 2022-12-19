@@ -10,7 +10,8 @@ Simple system for the management of a library.
     - id: int;
     - name: string
 
-## Features
+
+## Use cases
 - CRUD books;
 - CRUD authors;
 - Associate books to authors;
