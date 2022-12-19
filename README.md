@@ -5,10 +5,11 @@ Simple system for the management of a library.
 - Book
     - id: int;
     - name: string;
-    - author: Author;
+    - authors: Author[];
 - Author
     - id: int;
     - name: string
+    - books: Book[]
 
 
 ## Use cases
