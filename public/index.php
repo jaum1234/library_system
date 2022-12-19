@@ -21,6 +21,10 @@ $action = $routes["$method|$uri"];
 $response = new Response();
 $request = new Request();
 
+if ($action === null) {
+    return $response->status(404);
+}
+
 $controllerName = $action[0];
 $controllerMethod = $action[1];
 

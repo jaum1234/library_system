@@ -65,4 +65,13 @@ class BookRepository
         $this->entityManager->remove($book);
         $this->entityManager->flush();
     }
+
+    public function update($criteria, $data): void
+    {
+        $book = $this->repository->findOneBy($criteria);
+
+        $book->setName($data["name"]);
+
+        $this->entityManager->flush();
+    }
 }

@@ -43,11 +43,24 @@ class BooksController
 
     public function destroy(Request $request, Response $response)
     {
+        $id = $request->id();
+
         $this->bookRepository->remove([
-            "id" => $request->id()
+            "id" => $id
         ]);
 
         $response->status(204);
+    }
+
+    public function update(Request $request, Response $response)
+    {
+        $data = $request->body();
+        $id = $request->id();
+
+        $this->bookRepository->update(
+            ["id" => $id],
+            $data
+        );
     }
 
 }

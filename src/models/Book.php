@@ -30,6 +30,11 @@ class Book
     {
         return $this->name;
     }
+
+    public function setName(string $newName): void
+    {
+        $this->name = $newName;
+    }
 }
 
 ?>
