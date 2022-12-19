@@ -8,13 +8,13 @@ use Library\Models\Author;
 
 class AuthorRepository implements Repository
 {
-    private $authorRepository;
+    private $repository;
     private $entityManager;
 
     function __construct()
     {
         $this->entityManager = EntityManagerCreator::create();
-        $this->authorRepository = $this->entityManager->getRepository(Author::class);
+        $this->repository = $this->entityManager->getRepository(Author::class);
     }
 
     public function store(array $data): void
@@ -27,7 +27,7 @@ class AuthorRepository implements Repository
 
     public function fetchAll(): array
     {
-        $authors = $this->authorRepository->findAll();
+        $authors = $this->repository->findAll();
 
         $formatedAuthors = [];
 
@@ -43,7 +43,16 @@ class AuthorRepository implements Repository
 
     public function fetch(array $criteria): array
     {
-        return [];
+        $author = $this->repository->findOneBy($criteria);
+
+        if ($author === null) {
+            return [];
+        }
+
+        return [
+            "id" => $author->id(),
+            "name" => $author->name()
+        ];
     }
 
     public function update(array $criteria, array $data): void

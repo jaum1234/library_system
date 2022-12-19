@@ -33,9 +33,11 @@ class AuthorsController implements Crud
         return $response->json($authors);
     }
 
-    public function show(Request $request, Response $response): array
+    public function show(Request $request, Response $response)
     {
-        return [];
+        $author = $this->authorRepository->fetch(["id" => $request->id()]);
+        
+        return $response->json($author);
     }
 
     public function update(Request $request, Response $response): void
