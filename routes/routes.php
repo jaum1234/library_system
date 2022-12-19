@@ -1,5 +1,6 @@
 <?php
 
+use Library\Controllers\AuthorsController;
 use Library\Controllers\BooksController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -13,5 +14,6 @@ return [
     "POST|/books" => [BooksController::class, "store"],
     "GET|/books/$id" => [BooksController::class, "show"],
     "DELETE|/books/$id" => [BooksController::class, "destroy"],
-    "PUT|/books/$id" => [BooksController::class, "update"]
+    "PUT|/books/$id" => [BooksController::class, "update"],
+    "POST|/authors" => [AuthorsController::class, "create"]
 ];

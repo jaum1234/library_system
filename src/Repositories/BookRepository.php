@@ -1,11 +1,12 @@
 <?php
 
-namespace Library\repositories;
+namespace Library\Repositories;
 
 use Library\Helpers\EntityManagerCreator;
+use Library\Interfaces\Repository;
 use Library\Models\Book;
 
-class BookRepository
+class BookRepository implements Repository
 {
     private $repository;
     private $entityManager;
@@ -16,9 +17,9 @@ class BookRepository
         $this->repository = $this->entityManager->getRepository(Book::class);
     }
 
-    public function create(string $name): void
+    public function store(array $data): void
     {
-        $book = new Book($name);
+        $book = new Book($data["name"]);
 
         $this->entityManager->persist($book);
         $this->entityManager->flush();

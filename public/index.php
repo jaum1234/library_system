@@ -14,7 +14,7 @@ $response = new Response();
 $uri = $_SERVER["REQUEST_URI"];
 $method = $_SERVER["REQUEST_METHOD"];
 
-$routes = require_once __DIR__ . "/../routes/books.php";
+$routes = require_once __DIR__ . "/../routes/routes.php";
 
 $action = $routes["$method|$uri"];
 

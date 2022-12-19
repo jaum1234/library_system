@@ -4,7 +4,7 @@ namespace Library\Controllers;
 
 use Library\Helpers\EntityManagerCreator;
 use Library\Models\Book;
-use Library\repositories\BookRepository;
+use Library\Repositories\BookRepository;
 use Library\Helpers\Response;
 use Library\Helpers\Request;
 
@@ -29,7 +29,7 @@ class BooksController
     {
         $data = $request->body();
 
-        $this->bookRepository->create($data["name"]);
+        $this->bookRepository->store($data["name"]);
 
         $response->status(201);
     }
