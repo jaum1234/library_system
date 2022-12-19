@@ -26,9 +26,11 @@ class AuthorsController implements Crud
         $response->status(201);
     }
 
-    public function list(Request $request, Response $response): array
+    public function list(Request $request, Response $response)
     {
-        return [];
+        $authors = $this->authorRepository->fetchAll();
+
+        return $response->json($authors);
     }
 
     public function show(Request $request, Response $response): array

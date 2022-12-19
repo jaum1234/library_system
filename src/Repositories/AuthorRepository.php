@@ -27,7 +27,18 @@ class AuthorRepository implements Repository
 
     public function fetchAll(): array
     {
-        return [];
+        $authors = $this->authorRepository->findAll();
+
+        $formatedAuthors = [];
+
+        foreach ($authors as $author) {
+            array_push($formatedAuthors, [
+                "id" => $author->id(),
+                "name" => $author->name(),
+            ]);
+        }
+
+        return $formatedAuthors;
     }
 
     public function fetch(array $criteria): array

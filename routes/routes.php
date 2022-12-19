@@ -15,5 +15,6 @@ return [
     "GET|/books/$id" => [BooksController::class, "show"],
     "DELETE|/books/$id" => [BooksController::class, "destroy"],
     "PUT|/books/$id" => [BooksController::class, "update"],
-    "POST|/authors" => [AuthorsController::class, "create"]
+    "POST|/authors" => [AuthorsController::class, "create"],
+    "GET|/authors" => [AuthorsController::class, "list"]
 ];
