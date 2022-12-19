@@ -1,8 +1,7 @@
 <?php
 
-namespace Library\helper;
+namespace Library\Helpers;
 
-use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 

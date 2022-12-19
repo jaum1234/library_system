@@ -1,30 +1,53 @@
 <?php
 
-namespace Library\controllers;
+namespace Library\Controllers;
 
-use Library\helper\EntityManagerCreator;
-use Library\models\Book;
-
+use Library\Helpers\EntityManagerCreator;
+use Library\Models\Book;
+use Library\repositories\BookRepository;
+use Library\Helpers\Response;
+use Library\Helpers\Request;
 
 class BooksController
 {
-    public static function list()
+    private $bookRepository;
+
+    function __construct()
     {
-        $entityManager = EntityManagerCreator::create();
-
-        $bookRepository = $entityManager->getRepository(Book::class);
-
-        $books = $bookRepository->findAll();
-
-        $formatedBooks = [];
-
-        foreach ($books as $book) {
-            array_push($formatedBooks, [
-                "Id" => $book->id(),
-                "Name" => $book->name(),
-            ]);
-        }
-
-        return json_encode($formatedBooks);
+        $this->bookRepository = new BookRepository();
     }
+
+    public function list(Request $request, Response $response)
+    {
+        
+        $books = $this->bookRepository->fetchAll();
+
+        return $response->json($books);
+    }
+
+    public function store(Request $request, Response $response)
+    {
+        $data = $request->body();
+
+        $this->bookRepository->create($data["name"]);
+
+        $response->status(201);
+    }
+
+    public function show(Request $request, Response $response)
+    {
+        $book = $this->bookRepository->fetch(["id" => $request->id()]);
+        
+        return $response->json($book);
+    }
+
+    public function destroy(Request $request, Response $response)
+    {
+        $this->bookRepository->remove([
+            "id" => $request->id()
+        ]);
+
+        $response->status(204);
+    }
+
 }

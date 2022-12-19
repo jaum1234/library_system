@@ -1,6 +1,6 @@
 <?php
 
-namespace Library\models;
+namespace Library\Models;
 
 use Doctrine\ORM\Mapping as ORM;
 

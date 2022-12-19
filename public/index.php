@@ -1,22 +1,30 @@
 <?php 
 
-use Library\controllers\BooksController;
-use Library\helper\EntityManagerCreator;
+use Library\Helpers\EntityManagerCreator;
+use Library\Helpers\Request;
+use Library\Helpers\Response;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
 header("Content-Type: application/json");
 
-echo BooksController::list();
+$request = new Request();
+$response = new Response();
 
-// $requestMethod = $_SERVER["REQUEST_METHOD"];
-// $requestUri = $_SERVER["REQUEST_URI"];
+$uri = $_SERVER["REQUEST_URI"];
+$method = $_SERVER["REQUEST_METHOD"];
 
-// $request = "$requestMethod|$requestUri";
+$routes = require_once __DIR__ . "/../routes/books.php";
 
-// $routes = require_once __DIR__ . "/../routes/books.php";
+$action = $routes["$method|$uri"];
 
-// foreach ($routes as $key => $route) {
-    
-// }
+$response = new Response();
+$request = new Request();
+
+$controllerName = $action[0];
+$controllerMethod = $action[1];
+
+$controller = new $controllerName();
+echo $controller->$controllerMethod($request, $response);
+
 ?>
