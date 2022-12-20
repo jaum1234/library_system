@@ -68,7 +68,12 @@ class AuthorRepository implements Repository
 
     public function remove(array $criteria): void
     {
+        $author = $this->repository->findOneBy($criteria);
 
+        if ($author === null) return;
+
+        $this->entityManager->remove($author);
+        $this->entityManager->flush();
     }
 
     

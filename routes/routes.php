@@ -18,5 +18,6 @@ return [
     "POST|/authors" => [AuthorsController::class, "create"],
     "GET|/authors" => [AuthorsController::class, "list"],
     "GET|/authors/$id" => [AuthorsController::class, "show"],
-    "PUT|/authors/$id" => [AuthorsController::class, "update"]
+    "PUT|/authors/$id" => [AuthorsController::class, "update"],
+    "DELETE|/authors/$id" => [AuthorsController::class, "destroy"]
 ];

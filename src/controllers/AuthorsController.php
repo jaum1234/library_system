@@ -53,6 +53,10 @@ class AuthorsController implements Crud
 
     public function destroy(Request $request, Response $response): void
     {
+        $id = $request->id();
 
+        $this->authorRepository->remove(["id" => $id]);
+
+        $response->status(204);
     }
 }
