@@ -4,6 +4,7 @@ namespace Library\Helpers;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Dotenv\Dotenv;
 
 class EntityManagerCreator
 {
@@ -14,13 +15,16 @@ class EntityManagerCreator
             isDevMode: true
         );
 
+        $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
+        $dotenv->load();
+
         $connection = [
-            "driver" => "pdo_mysql",
-            "user" => "root",
+            "driver" => $_ENV["DB_DRIVER"],
+            "user" => $_ENV["DB_USER"],
             "port" => 3306,
-            "password" => "r2d2c3potc14ig88",
-            "host" => "localhost",
-            "dbname" => "library_system"
+            "password" => $_ENV["DB_PASSWORD"],
+            "host" => $_ENV["DB_HOST"],
+            "dbname" => $_ENV["DB_NAME"]
         ];
 
         return EntityManager::create($connection, $config);
