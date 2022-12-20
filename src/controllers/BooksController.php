@@ -2,8 +2,7 @@
 
 namespace Library\Controllers;
 
-use Library\Helpers\EntityManagerCreator;
-use Library\Models\Book;
+
 use Library\Repositories\BookRepository;
 use Library\Helpers\Response;
 use Library\Helpers\Request;
@@ -84,7 +83,6 @@ class BooksController implements Crud
         $book = $this->bookRepository->fetch(["id" => $id]);
 
         $bookAuthors = $book->authors();
-
 
         $formatedAuthors = $this->authorResource->format($bookAuthors);
 
