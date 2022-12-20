@@ -84,7 +84,7 @@ class AuthorsController implements Crud
 
         $formatedBooks = $this->bookResource->format($authorBooks);
 
-        $response->status(200)->json($formatedBooks);
+        return $response->status(200)->json($formatedBooks);
     }
 
 }
