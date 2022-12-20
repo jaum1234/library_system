@@ -27,32 +27,12 @@ class AuthorRepository implements Repository
 
     public function fetchAll(): array
     {
-        $authors = $this->repository->findAll();
-
-        $formatedAuthors = [];
-
-        foreach ($authors as $author) {
-            array_push($formatedAuthors, [
-                "id" => $author->id(),
-                "name" => $author->name(),
-            ]);
-        }
-
-        return $formatedAuthors;
+        return $this->repository->findAll();
     }
 
-    public function fetch(array $criteria): array
+    public function fetch(array $criteria): object | null
     {
-        $author = $this->repository->findOneBy($criteria);
-
-        if ($author === null) {
-            return [];
-        }
-
-        return [
-            "id" => $author->id(),
-            "name" => $author->name()
-        ];
+        return $this->repository->findOneBy($criteria);
     }
 
     public function update(array $criteria, array $data): void

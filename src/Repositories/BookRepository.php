@@ -34,42 +34,12 @@ class BookRepository implements Repository
 
     public function fetchAll(): array
     {
-        $books = $this->repository->findAll();
-
-        $formatedBooks = [];
-
-        foreach ($books as $book) {
-            $formatedAuthors = [];
-
-            foreach($book->authors() as $author) {
-                array_push($formatedAuthors, [
-                    "id" => $author->id(),
-                    "name" => $author->name()
-                ]);
-            }
-
-            array_push($formatedBooks, [
-                "id" => $book->id(),
-                "name" => $book->name(),
-                "authors" => $formatedAuthors
-            ]);
-        }
-
-        return $formatedBooks;
+        return $this->repository->findAll(); 
     }
 
-    public function fetch(array $criteria): array
+    public function fetch(array $criteria): object | null
     {
-        $book = $this->repository->findOneBy($criteria);
-
-        if ($book === null) {
-            return [];
-        }
-
-        return [
-            "id" => $book->id(),
-            "name" => $book->name()
-        ];
+        return $this->repository->findOneBy($criteria);
     }
 
     public function remove(array $criteria): void

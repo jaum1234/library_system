@@ -8,22 +8,26 @@ use Library\Repositories\BookRepository;
 use Library\Helpers\Response;
 use Library\Helpers\Request;
 use Library\Interfaces\Crud;
+use Library\Resources\BookResource;
 
 class BooksController implements Crud
 {
     private $bookRepository;
+    private BookResource $bookResource;
 
     function __construct()
     {
         $this->bookRepository = new BookRepository();
+        $this->bookResource = new BookResource();
     }
 
     public function list(Request $request, Response $response)
     {
-        
         $books = $this->bookRepository->fetchAll();
 
-        return $response->json($books);
+        $formatedBooks = $this->bookResource->format($books);
+
+        return $response->json($formatedBooks);
     }
 
     public function create(Request $request, Response $response)
@@ -38,8 +42,12 @@ class BooksController implements Crud
     public function show(Request $request, Response $response)
     {
         $book = $this->bookRepository->fetch(["id" => $request->id()]);
+
+        if ($book === null) return $response->status(404);
+
+        $formatedBook = $this->bookResource->format($book);
         
-        return $response->json($book);
+        return $response->json($formatedBook);
     }
 
     public function destroy(Request $request, Response $response)
