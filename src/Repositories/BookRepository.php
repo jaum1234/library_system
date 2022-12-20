@@ -4,23 +4,30 @@ namespace Library\Repositories;
 
 use Library\Helpers\EntityManagerCreator;
 use Library\Interfaces\Repository;
+use Library\Models\Author;
 use Library\Models\Book;
 
 class BookRepository implements Repository
 {
     private $repository;
     private $entityManager;
+    private $authorRepository;
 
     function __construct()
     {
         $this->entityManager = EntityManagerCreator::create();
         $this->repository = $this->entityManager->getRepository(Book::class);
+        $this->authorRepository = $this->entityManager->getRepository(Author::class);
     }
 
     public function store(array $data): void
     {
         $book = new Book($data["name"]);
 
+        if ($data["author_id"]) {
+            $author = $this->authorRepository->findOneBy(["id" => $data["author_id"]]);
+            $book->addAuthor($author);
+        }
         $this->entityManager->persist($book);
         $this->entityManager->flush();
     }
@@ -32,9 +39,19 @@ class BookRepository implements Repository
         $formatedBooks = [];
 
         foreach ($books as $book) {
+            $formatedAuthors = [];
+
+            foreach($book->authors() as $author) {
+                array_push($formatedAuthors, [
+                    "id" => $author->id(),
+                    "name" => $author->name()
+                ]);
+            }
+
             array_push($formatedBooks, [
                 "id" => $book->id(),
                 "name" => $book->name(),
+                "authors" => $formatedAuthors
             ]);
         }
 

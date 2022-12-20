@@ -1,6 +1,6 @@
 <?php
 
-use Library\helper\EntityManagerCreator;
+use Library\Helpers\EntityManagerCreator;
 use Library\models\Book;
 
 require_once __DIR__ . "/../vendor/autoload.php";

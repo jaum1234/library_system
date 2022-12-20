@@ -30,7 +30,7 @@ class BooksController implements Crud
     {
         $data = $request->body();
 
-        $this->bookRepository->store($data["name"]);
+        $this->bookRepository->store($data);
 
         $response->status(201);
     }

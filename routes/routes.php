@@ -11,7 +11,7 @@ $id = explode("/", $uri)[2];
 
 return [
     "GET|/books" => [BooksController::class, "list"],
-    "POST|/books" => [BooksController::class, "store"],
+    "POST|/books" => [BooksController::class, "create"],
     "GET|/books/$id" => [BooksController::class, "show"],
     "DELETE|/books/$id" => [BooksController::class, "destroy"],
     "PUT|/books/$id" => [BooksController::class, "update"],

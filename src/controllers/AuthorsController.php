@@ -59,4 +59,5 @@ class AuthorsController implements Crud
 
         $response->status(204);
     }
+
 }
