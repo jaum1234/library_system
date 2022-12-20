@@ -42,7 +42,13 @@ class AuthorsController implements Crud
 
     public function update(Request $request, Response $response): void
     {
+        $id = $request->id();
+        $data = $request->body();
 
+        $this->authorRepository->update(
+            ["id" => $id],
+            $data
+        );
     }
 
     public function destroy(Request $request, Response $response): void

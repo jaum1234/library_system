@@ -57,7 +57,13 @@ class AuthorRepository implements Repository
 
     public function update(array $criteria, array $data): void
     {
+        $author = $this->repository->findOneBy($criteria);
 
+        if ($author === null) return;
+
+        $author->setName($data["name"]);
+
+        $this->entityManager->flush();
     }
 
     public function remove(array $criteria): void

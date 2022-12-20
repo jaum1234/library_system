@@ -17,5 +17,6 @@ return [
     "PUT|/books/$id" => [BooksController::class, "update"],
     "POST|/authors" => [AuthorsController::class, "create"],
     "GET|/authors" => [AuthorsController::class, "list"],
-    "GET|/authors/$id" => [AuthorsController::class, "show"]
+    "GET|/authors/$id" => [AuthorsController::class, "show"],
+    "PUT|/authors/$id" => [AuthorsController::class, "update"]
 ];
