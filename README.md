@@ -13,6 +13,6 @@ Simple system for the management of a library.
 
 
 ## Use cases
-- CRUD books;
-- CRUD authors;
+- Create, read, update and delete books;
+- Create, read, udpate and delete authors;
 - Associate books to authors;
