@@ -8,16 +8,19 @@ use Library\Helpers\Request;
 use Library\Helpers\Response;
 use Library\Repositories\AuthorRepository;
 use Library\Resources\AuthorResource;
+use Library\Resources\BookResource;
 
 class AuthorsController implements Crud
 {
     private AuthorRepository $authorRepository;
     private AuthorResource $authorResource;
+    private BookResource $bookResource;
 
     function __construct()
     {
         $this->authorRepository = new AuthorRepository();
         $this->authorResource = new AuthorResource();
+        $this->bookResource = new BookResource();
     }
 
     public function create(Request $request, Response $response): void
@@ -69,6 +72,19 @@ class AuthorsController implements Crud
         $this->authorRepository->remove(["id" => $id]);
 
         $response->status(204);
+    }
+
+    public function listAuthorBooks(Request $request, Response $response)
+    {
+        $id = $request->id();
+
+        $author = $this->authorRepository->fetch(["id" => $id]);
+
+        $authorBooks = $author->books();
+
+        $formatedBooks = $this->bookResource->format($authorBooks);
+
+        $response->status(200)->json($formatedBooks);
     }
 
 }

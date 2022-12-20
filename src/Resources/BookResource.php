@@ -10,7 +10,7 @@ class BookResource extends Resource
     {
         return [
             "id" => $book->id(),
-            "name" => $book->name()
+            "name" => $book->name(),
         ];
     }
 
