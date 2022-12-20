@@ -2,11 +2,13 @@
 
 namespace Library\Resources;
 
+use Doctrine\Common\Collections\Collection;
+
 abstract class Resource 
 {
     public function format(array | object $resources)
     {
-        if (!is_array($resources)) {
+        if (!is_array($resources) && !($resources instanceof Collection) ) {
             return $this->formatResource($resources);
         }
 
