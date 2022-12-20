@@ -77,7 +77,7 @@ class BooksController implements Crud
         $response->status(200);
     }
 
-    public function listAuthors(Request $request, Response $response)
+    public function listBookAuthors(Request $request, Response $response)
     {
         $id = $request->id();
 
