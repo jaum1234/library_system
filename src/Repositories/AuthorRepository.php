@@ -55,6 +55,4 @@ class AuthorRepository implements Repository
         $this->entityManager->remove($author);
         $this->entityManager->flush();
     }
-
-    
 }

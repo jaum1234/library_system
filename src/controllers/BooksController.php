@@ -8,17 +8,20 @@ use Library\Repositories\BookRepository;
 use Library\Helpers\Response;
 use Library\Helpers\Request;
 use Library\Interfaces\Crud;
+use Library\Resources\AuthorResource;
 use Library\Resources\BookResource;
 
 class BooksController implements Crud
 {
     private $bookRepository;
     private BookResource $bookResource;
+    private AuthorResource $authorResource;
 
     function __construct()
     {
         $this->bookRepository = new BookRepository();
         $this->bookResource = new BookResource();
+        $this->authorResource = new AuthorResource();
     }
 
     public function list(Request $request, Response $response)
@@ -70,6 +73,21 @@ class BooksController implements Crud
             ["id" => $id],
             $data
         );
+
+        $response->status(200);
+    }
+
+    public function listAuthors(Request $request, Response $response)
+    {
+        $id = $request->id();
+
+        $book = $this->bookRepository->fetch(["id" => $id]);
+
+        $bookAuthors = $book->authors();
+
+        $formatedAuthors = $this->authorResource->format($bookAuthors);
+
+        return $response->status(200)->json($formatedAuthors);
     }
 
 }
