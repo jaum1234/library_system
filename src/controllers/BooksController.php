@@ -7,8 +7,9 @@ use Library\Models\Book;
 use Library\Repositories\BookRepository;
 use Library\Helpers\Response;
 use Library\Helpers\Request;
+use Library\Interfaces\Crud;
 
-class BooksController
+class BooksController implements Crud
 {
     private $bookRepository;
 
@@ -25,7 +26,7 @@ class BooksController
         return $response->json($books);
     }
 
-    public function store(Request $request, Response $response)
+    public function create(Request $request, Response $response)
     {
         $data = $request->body();
 
