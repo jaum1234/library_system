@@ -7,16 +7,16 @@ class Request
     private string $uri;
     private string $method;
     private array | null $body;
-    private int $id;
-    private string $resource;
+    private array $ids;
+    private array $resources;
 
     public function __construct()
     {
         $segregatedURI = $this->segregateURI();
 
         $this->uri = $_SERVER["REQUEST_URI"];
-        $this->id = $segregatedURI["id"];
-        $this->resource = $segregatedURI["resource"];
+        $this->ids = $segregatedURI["ids"];
+        $this->resources = $segregatedURI["resources"];
         $this->method = $_SERVER["REQUEST_METHOD"];
         $this->body = $this->extractBody();
     }
@@ -36,9 +36,9 @@ class Request
         return $this->body;
     }
 
-    public function resource(): string
+    public function resources(): array
     {
-        return $this->resource;
+        return $this->resources;
     }
 
     private function extractBody(): array | null
@@ -46,9 +46,9 @@ class Request
         return json_decode(file_get_contents("php://input"), true);
     }
 
-    public function id(): int
+    public function ids(): array
     {
-        return $this->id;
+        return $this->ids;
     }
 
     private function segregateURI(): array
@@ -57,9 +57,15 @@ class Request
 
         $segregatedURI = explode("/", $URI);
 
+        $primaryResource = $segregatedURI[1];
+        $secondaryResource = $segregatedURI[3];
+
+        $primaryId = intval($segregatedURI[2]);
+        $secondaryId = intval($segregatedURI[4]);
+
         return [
-            "resource" => $segregatedURI[1],
-            "id" => intval($segregatedURI[2])
+            "resources" => [$primaryResource, $secondaryResource],
+            "ids" => [$primaryId, $secondaryId]
         ];
     }
 }

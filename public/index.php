@@ -12,13 +12,13 @@ $response = new Response();
 
 $routes = require_once __DIR__ . "/../routes/routes.php";
 
-$resource = $request->resource();
+$resources = $request->resources();
 $method = $request->method();
-$id = $request->id();
+$ids = $request->ids();
 
-$parameter = $id != 0 ? "/$id" : "";
+$firstParameter = $ids[0] != 0 ? "/$ids[0]" : "";
 
-$action = $routes["$method|/$resource" . $parameter];
+$action = $routes["$method|/$resources[0]" . $firstParameter];
 
 if ($action === null) {
     return $response->status(404);
