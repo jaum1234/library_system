@@ -21,6 +21,11 @@ class Customer
         $this->name = $name;
     }
 
+    public function id(): int
+    {
+        return $this->id;
+    }
+
     public function name(): string
     {
         return $this->name;
