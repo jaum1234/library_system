@@ -55,13 +55,16 @@ class Request
     {
         $URI = $_SERVER["REQUEST_URI"];
 
+
         $segregatedURI = explode("/", $URI);
 
         $primaryResource = $segregatedURI[1];
         $secondaryResource = $segregatedURI[3];
 
+
         $primaryId = intval($segregatedURI[2]);
         $secondaryId = intval($segregatedURI[4]);
+
 
         return [
             "resources" => [$primaryResource, $secondaryResource],
