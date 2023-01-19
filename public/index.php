@@ -14,9 +14,11 @@ $routes = require_once __DIR__ . "/../routes/routes.php";
 
 $resource = $request->resource();
 $method = $request->method();
-$parameter = $request->id();
+$id = $request->id();
 
-$action = $routes["$method|/$reource"];
+$parameter = $id != 0 ? "/$id" : "";
+
+$action = $routes["$method|/$resource" . $parameter];
 
 if ($action === null) {
     return $response->status(404);
