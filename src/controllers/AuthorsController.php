@@ -43,7 +43,7 @@ class AuthorsController implements Crud
 
     public function show(Request $request, Response $response)
     {
-        $author = $this->authorRepository->fetch(["id" => $request->id()]);
+        $author = $this->authorRepository->fetch(["id" => $request->ids()[0]]);
 
         if ($author === null) {
             return $response->status(404);
@@ -56,7 +56,7 @@ class AuthorsController implements Crud
 
     public function update(Request $request, Response $response): void
     {
-        $id = $request->id();
+        $id = $request->ids()[0];
         $data = $request->body();
 
         $this->authorRepository->update(
@@ -67,7 +67,7 @@ class AuthorsController implements Crud
 
     public function destroy(Request $request, Response $response): void
     {
-        $id = $request->id();
+        $id = $request->ids()[0];
 
         $this->authorRepository->remove(["id" => $id]);
 
@@ -76,7 +76,7 @@ class AuthorsController implements Crud
 
     public function listAuthorBooks(Request $request, Response $response)
     {
-        $id = $request->id();
+        $id = $request->ids()[0];
 
         $author = $this->authorRepository->fetch(["id" => $id]);
 
