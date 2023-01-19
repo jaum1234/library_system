@@ -8,6 +8,7 @@ class Request
     private string $method;
     private array | null $body;
     private int $id;
+    private string $resource;
 
     public function __construct()
     {
@@ -15,6 +16,7 @@ class Request
 
         $this->uri = $_SERVER["REQUEST_URI"];
         $this->id = $segregatedURI["id"];
+        $this->resource = $segregatedURI["resource"];
         $this->method = $_SERVER["REQUEST_METHOD"];
         $this->body = $this->extractBody();
     }
@@ -32,6 +34,11 @@ class Request
     public function body(): array | null
     {
         return $this->body;
+    }
+
+    public function resource(): string
+    {
+        return $this->resource;
     }
 
     private function extractBody(): array | null

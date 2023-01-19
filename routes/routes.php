@@ -23,3 +23,5 @@ return [
     "DELETE|/authors/$id" => [AuthorsController::class, "destroy"],
     "GET|/authors/$id/books" => [AuthorsController::class, "listAuthorBooks"]
 ];
+    
+

@@ -1,6 +1,5 @@
 <?php 
 
-use Library\Helpers\EntityManagerCreator;
 use Library\Helpers\Request;
 use Library\Helpers\Response;
 
@@ -11,15 +10,13 @@ header("Content-Type: application/json");
 $request = new Request();
 $response = new Response();
 
-$uri = $_SERVER["REQUEST_URI"];
-$method = $_SERVER["REQUEST_METHOD"];
-
 $routes = require_once __DIR__ . "/../routes/routes.php";
 
-$action = $routes["$method|$uri"];
+$resource = $request->resource();
+$method = $request->method();
+$parameter = $request->id();
 
-$response = new Response();
-$request = new Request();
+$action = $routes["$method|/$reource"];
 
 if ($action === null) {
     return $response->status(404);
