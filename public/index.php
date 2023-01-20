@@ -24,15 +24,20 @@ $secondParameter = $ids[1] != 0 ? "/$ids[1]" : "";
 
 $action = $routes["$method|/$resources[0]" . $firstParameter . $secondResource . $secondParameter];
 
-if ($action === null) {
-    return $response->status(404);
+try {
+    if ($action === null) {
+        throw new \Exception("Route not found", 404);
+    }
+    
+    $controllerName = $action[0];
+    $controllerMethod = $action[1];
+    
+    $controller = new $controllerName();
+    
+    echo $controller->$controllerMethod($request, $response);
+} catch (\Exception $e) {
+    echo $response->status($e->getCode())->json(["error" => $e->getMessage()]);
 }
 
-$controllerName = $action[0];
-$controllerMethod = $action[1];
-
-$controller = new $controllerName();
-
-echo $controller->$controllerMethod($request, $response);
 
 ?>
