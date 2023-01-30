@@ -1,7 +1,7 @@
 <?php
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+namespace Library\Models;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]

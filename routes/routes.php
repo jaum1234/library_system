@@ -2,6 +2,7 @@
 
 use Library\Controllers\AuthorsController;
 use Library\Controllers\BooksController;
+use Library\Controllers\CustomersController;
 use Library\Helpers\Request;
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -29,10 +30,14 @@ $authorsRoutes = [
 ];
 
 $customersRoutes = [
-    "GET|/customers" => []
+    "GET|/customers" => [CustomersController::class, "create"]
 ];
 
-return array_merge($booksRoutes, $authorsRoutes, $customersRoutes);
+return array_merge(
+    $booksRoutes, 
+    $authorsRoutes, 
+    $customersRoutes
+);
     
 ?>
 

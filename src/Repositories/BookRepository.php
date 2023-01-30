@@ -3,14 +3,15 @@
 namespace Library\Repositories;
 
 use Library\Helpers\EntityManagerCreator;
-use Library\Interfaces\Repository;
+//use Library\Interfaces\Repository;
 use Library\Models\Author;
 use Library\Models\Book;
+use Library\Interfaces\Repository ;
 
 class BookRepository implements Repository
 {
     private $repository;
-    private $entityManager;
+    private $entityManager; 
     private $authorRepository;
 
     function __construct()
@@ -28,6 +29,7 @@ class BookRepository implements Repository
             $author = $this->authorRepository->findOneBy(["id" => $data["author_id"]]);
             $book->addAuthor($author);
         }
+        
         $this->entityManager->persist($book);
         $this->entityManager->flush();
     }
