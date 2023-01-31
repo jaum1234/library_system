@@ -12,7 +12,5 @@ class CustomerResource extends Resource
             "id" => $customer->id(),
             "name" => $customer->name(),
         ];
-    }
-
-  
+    }  
 }
